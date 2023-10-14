@@ -6,22 +6,7 @@
 	</listeners>
 	<test name="Login">
 		<classes>
-			<class name="com.cases.Login" />
-		</classes>
-	</test>
-	<test name="ValidateFooter">
-		<classes>
-			<class name="com.cases.ValidateFooter" />
-		</classes>
-	</test>
-	<test name="ValidateTitle">
-		<classes>
-			<class name="com.cases.ValidateTitle" />
-		</classes>
-	</test>
-	<test name="BookAppointment">
-		<classes>
-			<class name="com.cases.BookAppointment" />
+			<class name="testCases.Login" />
 		</classes>
 	</test>
 </suite>

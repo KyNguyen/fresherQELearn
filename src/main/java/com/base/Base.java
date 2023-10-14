@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -22,16 +23,13 @@ public class Base {
 		String browserName = prop.getProperty("browser");
 
 		if (browserName.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver",
-					System.getProperty("user.dir") + "/src/main/resources/chromedriver");
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		} else if (browserName.equals("firefox")) {
-			System.setProperty("webdriver.gecko.driver",
-					System.getProperty("user.dir") + "/src/main/resources/resources/geckodriver");
+			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		} else if (browserName.equals("ie")) {
-			System.setProperty("webdriver.ie.driver",
-					System.getProperty("user.dir") + "/src/main/resources/IEDriverServer");
+			WebDriverManager.iedriver().setup();
 			driver = new InternetExplorerDriver();
 		} else {
 			System.out.println(browserName + " is not a valid browser");
