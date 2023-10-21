@@ -42,7 +42,7 @@ public class Login extends Base {
 		
 		actions.navigateTo(prop.getProperty("url"));
 		actions.enterText(loginPage.getUsername(), "kynguyen1");
-		actions.enterText(loginPage.getPassword(), "Tudi3nma!");
+		actions.enterText(loginPage.getPassword(), "validPasseword");
 		actions.click(loginPage.getLoginBtn());
 		Assert.assertTrue(profilePage.getUserNameLbl().isDisplayed());
 		log.info("Successfully Logged In");
@@ -54,7 +54,7 @@ public class Login extends Base {
 
 		actions.navigateTo(prop.getProperty("url"));
 		actions.enterText(loginPage.getUsername(), "kynguyen1");
-		actions.enterText(loginPage.getPassword(), "Tud");
+		actions.enterText(loginPage.getPassword(), "invalidPasseword");
 		actions.click(loginPage.getLoginBtn());
 
 		String expectedError = "Invalid username or password!";
