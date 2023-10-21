@@ -15,7 +15,7 @@ import org.testng.annotations.DataProvider;
 import com.actions.Actions;
 import com.base.Base;
 import com.codoid.products.exception.FilloException;
-import com.pageObjects.HomePage;
+import com.pageObjects.ProfilePage;
 import com.pageObjects.LoginPage;
 import com.utils.Utils;
 
@@ -25,27 +25,42 @@ public class Login extends Base {
 	public Actions actions;
 	
 	private Logger log = LogManager.getLogger(Login.class.getName());
-	private HashMap<String, String> data;
+	private HashMap<String, String> dataTC1;
 
 	@BeforeTest
 	public void initialize() throws IOException, FilloException {
 		driver = initializeDriver();
 		log.info("Driver is initialized.");
-		data = new Utils().getTestData("TC1");
+		dataTC1 = new Utils().getTestData("TC1");
 		actions = new Actions(driver);
 	}
 
 	@Test
-	public void performLogin() {
-		HomePage hp = new HomePage(driver);
-		LoginPage lp = new LoginPage(driver);
+	public void testLoginSuccessfully() {
+		ProfilePage profilePage = new ProfilePage(driver);
+		LoginPage loginPage = new LoginPage(driver);
 		
 		actions.navigateTo(prop.getProperty("url"));
-		actions.enterText(lp.getUsername(), data.get("Username"));
-		actions.enterText(lp.getPassword(), data.get("Password"));
-		actions.click(lp.getLoginBtn());
-		Assert.assertTrue(hp.getTitle().isDisplayed());
+		actions.enterText(loginPage.getUsername(), "kynguyen1");
+		actions.enterText(loginPage.getPassword(), "Tudi3nma!");
+		actions.click(loginPage.getLoginBtn());
+		Assert.assertTrue(profilePage.getUserNameLbl().isDisplayed());
 		log.info("Successfully Logged In");
+	}
+
+	@Test
+	public void testLoginWithInvalidPassword() {
+		LoginPage loginPage = new LoginPage(driver);
+
+		actions.navigateTo(prop.getProperty("url"));
+		actions.enterText(loginPage.getUsername(), "kynguyen1");
+		actions.enterText(loginPage.getPassword(), "Tud");
+		actions.click(loginPage.getLoginBtn());
+
+		String expectedError = "Invalid username or password!";
+		String actualError = loginPage.getErrorMessageTxt().getText();
+		Assert.assertTrue(actualError.equals(expectedError));
+		log.info("The error message '" + expectedError + "' is displayed");
 	}
 
 	@DataProvider

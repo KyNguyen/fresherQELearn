@@ -13,9 +13,10 @@ public class LoginPage {
 	}
 	
 	// All objects should be defined here
-	private By username = By.cssSelector("input[name='username']");
-	private By password = By.cssSelector("input[name='password']");
-	private By loginBtn = By.cssSelector("button[id='btn-login']");
+	private By username = By.id("userName");
+	private By password = By.id("password");
+	private By loginBtn = By.id("login");
+	private By errorMessageTxt = By.id("name");
 	
 	// All methods should be defined here
 	public WebElement getUsername() {
@@ -27,6 +28,7 @@ public class LoginPage {
 	public WebElement getLoginBtn() {
 		return driver.findElement(loginBtn);
 	}
-
-
+	public WebElement getErrorMessageTxt() {
+		return driver.findElement(errorMessageTxt);
+	}
 }
