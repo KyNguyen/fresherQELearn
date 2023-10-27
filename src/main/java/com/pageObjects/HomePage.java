@@ -15,7 +15,7 @@ public class HomePage {
 	// All objects should be defined here
 	private By menuBtn = By.cssSelector("a[id='menu-toggle']");
 	private By login = By.cssSelector("a[href*='login']");
-	private By title = By.cssSelector("h1");
+	private By labelUserName = By.id("userName-label");
 	private By footer = By.cssSelector("footer");
 	
 	
@@ -28,8 +28,8 @@ public class HomePage {
 		return driver.findElement(login);
 	}
 	
-	public WebElement getTitle() {
-		return driver.findElement(title);
+	public WebElement getLabelUserName() {
+		return driver.findElement(labelUserName);
 	}
 	
 	public WebElement getFooter() {

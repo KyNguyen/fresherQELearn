@@ -13,9 +13,9 @@ public class LoginPage {
 	}
 	
 	// All objects should be defined here
-	private By username = By.cssSelector("input[name='username']");
-	private By password = By.cssSelector("input[name='password']");
-	private By loginBtn = By.cssSelector("button[id='btn-login']");
+	private By username = By.id("userName");
+	private By password = By.id("password");
+	private By loginBtn = By.id("login");
 	
 	// All methods should be defined here
 	public WebElement getUsername() {
