@@ -11,12 +11,19 @@ public class ProfilePage {
 	public ProfilePage(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
+
 	// All objects should be defined here
-	private By lbl_userName = By.id("userName-value");
+	private By userNameLbl = By.id("userName-value");
+	private By logOutBtn = By.id("submit");
+
 
 	// All methods should be defined here
 	public WebElement getUserNameLbl() {
-		return driver.findElement(lbl_userName);
+		return driver.findElement(userNameLbl);
+	}
+
+	public WebElement getLogOutBtn() {
+		return driver.findElement(logOutBtn);
 	}
 }

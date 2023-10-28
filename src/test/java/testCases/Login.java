@@ -26,12 +26,14 @@ public class Login extends Base {
 	
 	private Logger log = LogManager.getLogger(Login.class.getName());
 	private HashMap<String, String> dataTC1;
+	private HashMap<String, String> dataTC2;
 
 	@BeforeTest
 	public void initialize() throws IOException, FilloException {
 		driver = initializeDriver();
 		log.info("Driver is initialized.");
 		dataTC1 = new Utils().getTestData("TC1");
+		dataTC2 = new Utils().getTestData("TC2");
 		actions = new Actions(driver);
 	}
 
@@ -41,11 +43,12 @@ public class Login extends Base {
 		LoginPage loginPage = new LoginPage(driver);
 		
 		actions.navigateTo(prop.getProperty("url"));
-		actions.enterText(loginPage.getUsername(), "kynguyen1");
-		actions.enterText(loginPage.getPassword(), "validPassword");
+		actions.enterText(loginPage.getUsername(), dataTC1.get("Username"));
+		actions.enterText(loginPage.getPassword(), dataTC1.get("Password"));
 		actions.click(loginPage.getLoginBtn());
-		Assert.assertTrue(profilePage.getUserNameLbl().isDisplayed());
+		Assert.assertTrue(profilePage.getUserNameLbl().getText().equals(dataTC1.get("Username")));
 		log.info("Successfully Logged In");
+		actions.click(profilePage.getLogOutBtn());
 	}
 
 	@Test
@@ -53,8 +56,8 @@ public class Login extends Base {
 		LoginPage loginPage = new LoginPage(driver);
 
 		actions.navigateTo(prop.getProperty("url"));
-		actions.enterText(loginPage.getUsername(), "kynguyen1");
-		actions.enterText(loginPage.getPassword(), "invalidPassword");
+		actions.enterText(loginPage.getUsername(), dataTC2.get("Username"));
+		actions.enterText(loginPage.getPassword(), dataTC2.get("Password"));
 		actions.click(loginPage.getLoginBtn());
 
 		String expectedError = "Invalid username or password!";
